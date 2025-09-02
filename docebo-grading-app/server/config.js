@@ -17,7 +17,7 @@ module.exports = {
    * talk to the test instance at docebo70.docebosaas.com.  If you
    * deploy against a different tenant update this value accordingly.
    */
-  baseUrl: 'https://docebo70.docebosaas.com',
+  baseUrl: 'https://docebo70.docebosaas.process.env.DOCEBO_BASE_URL || 'https://docebo70.docebosaas.com',com',
 
   /**
    * OAuth client ID issued by Docebo.  Replace with the client ID you
