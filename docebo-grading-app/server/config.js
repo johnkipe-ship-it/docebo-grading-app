@@ -1,46 +1,27 @@
 /*
  * Configuration for the Docebo Assignment Grading BFF.
  *
- * Replace the placeholders below with values specific to your Docebo tenant.
- * You can find your `baseUrl` by logging into Docebo and copying the
- * hostname (e.g. "acme.docebosaas.com").  The `clientId` and
- * `clientSecret` are created when you register an OAuth2 client under
- * the API & SSO app in Docebo.  Set `redirectUri` to a URL hosted by
- * this server (e.g. `http://localhost:5000/oauth/callback`).  The
- * `scopes` array should include the permissions your app needs (see
- * Docebo documentation for available scopes).
+ * This file reads configuration from environment variables:
+ * - DOCEBO_BASE_URL: base URL of your Docebo tenant (e.g., https://company.docebosaas.com)
+ * - DOCEBO_CLIENT_ID: OAuth client ID from the API & SSO app
+ * - DOCEBO_CLIENT_SECRET: OAuth client secret from the API & SSO app
+ * - DOCEBO_REDIRECT_URI: redirect URI configured for your OAuth client
+ * - DOCEBO_SCOPES: comma-separated list of scopes (optional; defaults to assignment:read,assignment:update,user:read)
+ *
+ * It falls back to sensible defaults if some variables are not set.
  */
 
+const baseUrl = process.env.DOCEBO_BASE_URL || 'https://docebo70.docebosaas.com';
+const clientId = process.env.DOCEBO_CLIENT_ID || 'REPLACE_WITH_CLIENT_ID';
+const clientSecret = process.env.DOCEBO_CLIENT_SECRET || 'REPLACE_WITH_CLIENT_SECRET';
+const redirectUri = process.env.DOCEBO_REDIRECT_URI || 'http://localhost:5000/oauth/callback';
+const scopesEnv = process.env.DOCEBO_SCOPES || 'assignment:read,assignment:update,user:read';
+const scopes = scopesEnv.split(',').map((s) => s.trim());
+
 module.exports = {
-  /**
-   * Base URL of your Docebo tenant.  This application is configured to
-   * talk to the test instance at docebo70.docebosaas.com.  If you
-   * deploy against a different tenant update this value accordingly.
-   */
-  baseUrl: 'https://docebo70.docebosaas.process.env.DOCEBO_BASE_URL || 'https://docebo70.docebosaas.com',com',
-
-  /**
-   * OAuth client ID issued by Docebo.  Replace with the client ID you
-   * create in the API & SSO app.
-   */
-  clientId: 'REPLACE_WITH_CLIENT_ID',
-
-  /**
-   * OAuth client secret issued by Docebo.  Replace with the client secret.
-   */
-  clientSecret: 'REPLACE_WITH_CLIENT_SECRET',
-
-  /**
-   * Redirect URI configured for your OAuth client.  This URL must
-   * resolve to the callback route on this server.  If you change the
-   * hostname or port of the server, update this value and the
-   * corresponding redirect URI in Docebo.
-   */
-  redirectUri: 'http://localhost:5000/oauth/callback',
-
-  /**
-   * Scopes required to call Docebo APIs.  These values correspond to
-   * permissions listed in the API Browser.  Adjust as needed.
-   */
-  scopes: ['assignment:read', 'assignment:update', 'user:read']
+  baseUrl,
+  clientId,
+  clientSecret,
+  redirectUri,
+  scopes,
 };
