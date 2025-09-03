@@ -12,8 +12,8 @@
  */
 
 const baseUrl = process.env.DOCEBO_BASE_URL || 'https://docebo70.docebosaas.com';
-const clientId = process.env.DOCEBO_CLIENT_ID || 'REPLACE_WITH_CLIENT_ID';
-const clientSecret = process.env.DOCEBO_CLIENT_SECRET || 'REPLACE_WITH_CLIENT_SECRET';
+const clientId = process.env.DOCEBO_CLIENT_ID || 'local-assignment-grader';
+const clientSecret = process.env.DOCEBO_CLIENT_SECRET || 'a538f5455e98b33b80cf2c859756e78fd0c37d63fff158a48aaf6405cd053b6c';
 const redirectUri = process.env.DOCEBO_REDIRECT_URI || 'http://localhost:5000/oauth/callback';
 const scopesEnv = process.env.DOCEBO_SCOPES || 'assignment:read,assignment:update,user:read';
 const scopes = scopesEnv.split(',').map((s) => s.trim());
